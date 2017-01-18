@@ -1,6 +1,7 @@
 ---
 driver:
   name: dokken
+  privileged: true
   chef_version: latest
 
 transport:
@@ -8,6 +9,11 @@ transport:
 
 provisioner:
   name: dokken
+  attributes:
+    nodejs:
+      repo: "https://deb.nodesource.com/node_6.x"
+      key: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+      keyserver: ""
 
 verifier:
   name: inspec
@@ -15,10 +21,17 @@ verifier:
 platforms:
   - name: ubuntu-14.04
     driver:
+      image: ubuntu-upstart:14.04
       pid_one_command: /sbin/init
+      intermediate_instructions:
+        - RUN /usr/bin/apt-get update
   - name: ubuntu-16.04
     driver:
+      image: ubuntu:16.04
       pid_one_command: /bin/systemd
+      intermediate_instructions:
+        - RUN /usr/bin/apt-get update
+        - RUN /usr/bin/apt-get install -y openssh-server dbus apt-transport-https lsb-release procps net-tools sudo
 
 suites:
   - name: default
