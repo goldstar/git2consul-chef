@@ -6,3 +6,8 @@
 #
 
 include_recipe 'git'
+include_recipe 'nodejs'
+include_recipe 'nodejs::npm'
+
+
+nodejs_npm 'git2consul'
