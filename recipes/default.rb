@@ -2,7 +2,7 @@
 # Cookbook Name:: git2consul
 # Recipe:: default
 #
-# Copyright (C) 2017 YOUR_NAME
+# Copyright (C) 2017 Goldstar Events, Inc.
 #
-# All rights reserved - Do Not Redistribute
-#
+
+include_recipe 'git'
