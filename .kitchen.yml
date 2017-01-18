@@ -1,0 +1,27 @@
+---
+driver:
+  name: dokken
+  chef_version: latest
+
+transport:
+  name: dokken
+
+provisioner:
+  name: dokken
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: ubuntu-14.04
+    driver:
+      pid_one_command: /sbin/init
+  - name: ubuntu-16.04
+    driver:
+      pid_one_command: /bin/systemd
+
+suites:
+  - name: default
+    run_list:
+      - recipe[git2consul]
+      - recipe[git2consul-test]
