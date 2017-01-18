@@ -36,5 +36,6 @@ platforms:
 suites:
   - name: default
     run_list:
+      - recipe[consul]
       - recipe[git2consul]
       - recipe[git2consul-test]

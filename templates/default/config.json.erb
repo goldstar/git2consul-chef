@@ -3,7 +3,7 @@
   "local_store": "<%= node['git2consul']['local_store'] %>",
   "logger" : {
     "name" : "git2consul",
-    "streams" : <%= JSON.generate(node['git2consul']['log_streams'], indent: 2) %>
+    "streams" : <%= JSON.pretty_generate(node['git2consul']['log_streams']) %>
   },
-  "repos" : <%= JSON.generate(node['git2consul']['repositories'], indent: 2) %>
+  "repos" : <%= JSON.pretty_generate(node['git2consul']['repositories']) %>
 }
