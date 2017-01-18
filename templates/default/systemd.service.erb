@@ -1,0 +1,16 @@
+[Unit]
+Description=git2consul
+After=syslog.target
+After=network.target
+ConditionPathExists=<%= node['git2consul']['path_to_module'] %>
+
+[Service]
+Type=simple
+User=<%= node['git2consul']['user'] %>
+Group=<%= node['git2consul']['group'] %>
+ExecStartPre=/usr/bin/nodejs <%= node['git2consul']['path_to_module'] %>/utils/config_seeder.js --endpoint <%= node['git2consul']['endpoint'] %> --port <%= node['git2consul']['port'].to_i %> <%= node['git2consul']['config_dir'] %>/config.json
+ExecStart=/usr/bin/nodejs <%= node['git2consul']['path_to_module'] %>/lib/index.js --endpoint <%= node['git2consul']['endpoint'] %> --port <%= node['git2consul']['port'].to_i %>
+TimeoutStopSec=59
+
+[Install]
+WantedBy=multi-user.target

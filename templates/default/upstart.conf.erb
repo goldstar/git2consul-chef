@@ -1,0 +1,18 @@
+# Managed by Chef.
+
+description "git2consul service"
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+setuid <%= node['git2consul']['user'] %>
+setgid <%= node['git2consul']['group'] %>
+
+chdir <%= node['git2consul']['path_to_module'] %>
+
+respawn
+respawn limit 10 10
+kill timeout 10
+
+script
+  exec node git2consul
+end script
